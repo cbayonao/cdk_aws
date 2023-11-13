@@ -4,6 +4,7 @@ import os
 import aws_cdk as cdk
 
 from transactions_migration.transactions_migration_stack import TransactionsMigrationStack
+from consumption_layer.consumption_layer_stack import ConsumptionLayerStack
 
 
 app = cdk.App()
@@ -15,7 +16,7 @@ TransactionsMigrationStack(app, "TransactionsMigrationStack",
     # Uncomment the next line to specialize this stack for the AWS Account
     # and Region that are implied by the current CLI configuration.
 
-    #env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
+    env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
 
     # Uncomment the next line if you know exactly what Account and Region you
     # want to deploy the stack to. */
@@ -23,6 +24,10 @@ TransactionsMigrationStack(app, "TransactionsMigrationStack",
     #env=cdk.Environment(account='123456789012', region='us-east-1'),
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
+    )
+
+ConsumptionLayerStack(app, "ConsumptionLayerStack",
+    env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
     )
 
 app.synth()
